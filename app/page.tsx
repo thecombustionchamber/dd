@@ -6,9 +6,8 @@ import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
-  console.log("[v0] Page rendering")
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#fff", color: "#000" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: "#ffffff", color: "#111111" }}>
       <Header />
       <main>
         <HeroSection />

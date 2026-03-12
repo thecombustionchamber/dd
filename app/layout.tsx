@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans`}>{children}</body>
+      <body className={`${inter.variable} font-sans`} style={{ backgroundColor: "#fff", color: "#111" }}>{children}</body>
     </html>
   )
 }
