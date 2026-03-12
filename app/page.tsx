@@ -6,8 +6,9 @@ import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
+  console.log("[v0] Page rendering")
   return (
-    <>
+    <div className="min-h-screen" style={{ backgroundColor: "#fff", color: "#000" }}>
       <Header />
       <main>
         <HeroSection />
@@ -16,6 +17,6 @@ export default function Home() {
         <CtaSection />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

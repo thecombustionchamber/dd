@@ -1,18 +1,26 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function HeroSvg() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
+    console.log("[v0] Fetching SVG...")
+    
     // Load and process the SVG
     fetch("/x.svg")
-      .then((res) => res.text())
+      .then((res) => {
+        console.log("[v0] SVG fetch response:", res.status)
+        if (!res.ok) throw new Error(`Failed to load SVG: ${res.status}`)
+        return res.text()
+      })
       .then((svgText) => {
+        console.log("[v0] SVG loaded, length:", svgText.length)
         container.innerHTML = svgText
 
         const svg = container.querySelector("svg")
@@ -88,12 +96,20 @@ export function HeroSvg() {
         `
         svg.insertBefore(styleEl, svg.firstChild)
       })
+      .catch((err) => {
+        console.error("[v0] SVG error:", err)
+        setError(err.message)
+      })
   }, [])
+
+  if (error) {
+    return <div className="text-red-500 p-4">Error loading SVG: {error}</div>
+  }
 
   return (
     <div 
       ref={containerRef} 
-      className="w-full max-w-4xl mx-auto"
+      className="w-full max-w-4xl mx-auto min-h-[200px]"
       aria-label="Hero graphic"
     />
   )
